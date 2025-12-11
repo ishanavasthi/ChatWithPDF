@@ -1,0 +1,27 @@
+{
+    "name": "chatwithpdf",
+    "description": "AI PDF chatbot - Chat with your PDF documents using AI",
+    "private": true,
+    "version": "1.0.0",
+    "author": "Ishan Avasthi",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ishanavasthi/ChatWithPDF.git"
+    },
+    "workspaces": [
+      "backend",
+      "frontend"
+    ],
+    "scripts": {
+      "build": "yarn run turbo:command build",
+      "turbo:command": "yarn turbo",
+      "lint": "yarn run turbo:command lint",
+      "lint:fix": "yarn run turbo:command lint:fix", 
+      "format": "yarn run turbo:command format",
+      "format:check": "yarn run turbo:command format:check"
+    },
+    "devDependencies": {
+      "turbo": "latest"
+    }
+  }
