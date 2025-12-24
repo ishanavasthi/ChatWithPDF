@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: langgraph-backend
+    env: docker
+    root: .
+    plan: free
+    dockerFilePath: backend/Dockerfile
+    envVars:
+      - key: LANGCHAIN_TRACING_V2
+        value: "true"
+      - key: LANGCHAIN_PROJECT
+        value: "ai-agent-pdf-chatbot"
+      - key: LANGGRAPH_INGESTION_ASSISTANT_ID
+        value: "ingestion_graph"
+      - key: LANGGRAPH_RETRIEVAL_ASSISTANT_ID
+        value: "retrieval_graph"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: LANGCHAIN_API_KEY
+        sync: false
+
+  - type: web
+    name: chatwithpdf-frontend
+    env: node
+    plan: free
+    root: .
+    buildCommand: yarn install && yarn turbo run build --filter=frontend
+    startCommand: cd frontend && yarn start
+    envVars:
+      - key: NEXT_PUBLIC_LANGGRAPH_API_URL
+        fromService:
+          type: web
+          name: langgraph-backend
+          property: url
+      - key: LANGGRAPH_INGESTION_ASSISTANT_ID
+        value: "ingestion_graph"
+      - key: LANGGRAPH_RETRIEVAL_ASSISTANT_ID
+        value: "retrieval_graph"
+      - key: LANGCHAIN_TRACING_V2
+        value: "true"
+      - key: LANGCHAIN_PROJECT
+        value: "pdf-chatbot"
+      - key: LANGCHAIN_API_KEY
+        sync: false
