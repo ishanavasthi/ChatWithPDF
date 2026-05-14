@@ -191,8 +191,10 @@ export default function Home() {
       });
       setMessages((prev) => {
         const newArr = [...prev];
-        newArr[newArr.length - 1].content =
-          'Sorry, there was an error processing your message.';
+        if (newArr.length > 0 && newArr[newArr.length - 1].role === 'assistant') {
+          newArr[newArr.length - 1].content =
+            'Sorry, there was an error processing your message.';
+        }
         return newArr;
       });
     } finally {

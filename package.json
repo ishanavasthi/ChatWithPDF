@@ -9,12 +9,12 @@
         "type": "git",
         "url": "https://github.com/ishanavasthi/ChatWithPDF.git"
     },
+    "packageManager": "yarn@1.22.22",
     "workspaces": [
       "backend",
       "frontend"
     ],
-    "scripts": {
-      "build": "yarn run turbo:command build",
+    "scripts": {      "dev": "yarn run turbo:command dev",      "build": "yarn run turbo:command build",
       "turbo:command": "yarn turbo",
       "lint": "yarn run turbo:command lint",
       "lint:fix": "yarn run turbo:command lint:fix", 
